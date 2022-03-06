@@ -36,6 +36,7 @@ integer i,j,k,t,p,q,s,u, m;
 reg reset = 1;
 reg clk = 0;
 reg [pr*bw-1:0] mem_in; 
+wire [bw_psum*col-1:0] out; 
 reg ofifo_rd = 0;
 wire [16:0] inst; 
 reg qmem_rd = 0;
@@ -73,6 +74,7 @@ reg [bw_psum*col-1:0] temp16b;
 fullchip #(.bw(bw), .bw_psum(bw_psum), .col(col), .pr(pr)) fullchip_instance (
       .reset(reset),
       .clk(clk), 
+      .out(out),
       .mem_in(mem_in), 
       .inst(inst)
 );
@@ -355,13 +357,32 @@ $display("##### move ofifo to pmem #####");
   end
 
   #0.5 clk = 1'b0;  
+  pmem_wr = 0; pmem_add = 0; pmem_rd = 1;
+  #0.5 clk = 1'b1;  
+
+/*
+ * Added to verify out net working correctly 
+ *
+ * -Colin
+ */
+$display("##### out read-back #####");
+
+  for (q=0; q<total_cycle; q=q+1) begin
+    #0.5 clk = 1'b0;  
+
+    if (q>0) begin
+       pmem_add = pmem_add + 1;
+    end
+
+    $display("Memory read back %x %x ", pmem_add, out); 
+    #0.5 clk = 1'b1;  
+  end
+
+  #0.5 clk = 1'b0;  
   pmem_wr = 0; pmem_add = 0; ofifo_rd = 0;
   #0.5 clk = 1'b1;  
 
 ///////////////////////////////////////////
-
-
-
 
   #10 $finish;
 

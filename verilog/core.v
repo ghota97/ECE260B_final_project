@@ -48,6 +48,15 @@ assign pmem_wr = inst[0];
 assign mac_in  = inst[6] ? kmem_out : qmem_out;
 assign pmem_in = fifo_out;
 
+/*
+ * PnR will not provide timing information unless the "out" port is connected in this module and instantiated in TB
+ * out port is for delivering final output while sum_out port is communication between two cores to exchange partial sums
+ * For now we let out = pmem_out but this may change later on
+ *
+ * - Colin
+ */
+assign out = pmem_out;
+
 mac_array #(.bw(bw), .bw_psum(bw_psum), .col(col), .pr(pr)) mac_array_instance (
         .in(mac_in), 
         .clk(clk), 
