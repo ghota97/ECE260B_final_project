@@ -1,0 +1,132 @@
+
+Cadence Innovus(TM) Implementation System.
+Copyright 2019 Cadence Design Systems, Inc. All rights reserved worldwide.
+
+Version:	v19.17-s077_1, built Tue Dec 1 11:09:44 PST 2020
+Options:	
+Date:		Mon Mar  7 09:13:14 2022
+Host:		ieng6-641.ucsd.edu (x86_64 w/Linux 3.10.0-1160.49.1.el7.x86_64) (2cores*4cpus*Intel(R) Xeon(R) CPU E5-2650 v2 @ 2.60GHz 20480KB)
+OS:		CentOS Linux release 7.9.2009 (Core)
+
+License:
+		invs	Innovus Implementation System	19.1	checkout succeeded
+		8 CPU jobs allowed with the current license(s). Use setMultiCpuUsage to set your required CPU count.
+Change the soft stacksize limit to 0.2%RAM (64 mbytes). Set global soft_stack_size_limit to change the value.
+
+**INFO:  MMMC transition support version v31-84 
+
+<CMD> set_global _enable_mmmc_by_default_flow      $CTE::mmmc_default
+<CMD> suppressMessage ENCEXT-2799
+<CMD> win
+<CMD> encMessage warning 0
+Suppress "**WARN ..." messages.
+<CMD> encMessage debug 0
+<CMD> encMessage info 0
+Cmin Cmax
+**WARN: (IMPLF-200):	Pin 'I' in macro 'ANTENNA' has no ANTENNAGATEAREA value defined. The library data is incomplete and some process antenna rules will not be checked correctly.
+Loading view definition file from /home/linux/ieng6/ee260bwi22/cdrewes/ECE260B_final_project/route.enc.dat/viewDefinition.tcl
+*** End library_loading (cpu=0.05min, real=0.03min, mem=20.0M, fe_cpu=0.84min, fe_real=2.53min, fe_mem=731.1M) ***
+**WARN: (IMPVL-159):	Pin 'VSS' of cell 'XOR4D4' is defined in LEF but not in the timing library.
+**WARN: (IMPVL-159):	Pin 'VDD' of cell 'XOR4D4' is defined in LEF but not in the timing library.
+**WARN: (IMPVL-159):	Pin 'VSS' of cell 'XOR4D2' is defined in LEF but not in the timing library.
+**WARN: (IMPVL-159):	Pin 'VDD' of cell 'XOR4D2' is defined in LEF but not in the timing library.
+**WARN: (IMPVL-159):	Pin 'VSS' of cell 'XOR4D1' is defined in LEF but not in the timing library.
+**WARN: (IMPVL-159):	Pin 'VDD' of cell 'XOR4D1' is defined in LEF but not in the timing library.
+**WARN: (IMPVL-159):	Pin 'VSS' of cell 'XOR4D0' is defined in LEF but not in the timing library.
+**WARN: (IMPVL-159):	Pin 'VDD' of cell 'XOR4D0' is defined in LEF but not in the timing library.
+**WARN: (IMPVL-159):	Pin 'VSS' of cell 'XOR3D4' is defined in LEF but not in the timing library.
+**WARN: (IMPVL-159):	Pin 'VDD' of cell 'XOR3D4' is defined in LEF but not in the timing library.
+**WARN: (IMPVL-159):	Pin 'VSS' of cell 'XOR3D2' is defined in LEF but not in the timing library.
+**WARN: (IMPVL-159):	Pin 'VDD' of cell 'XOR3D2' is defined in LEF but not in the timing library.
+**WARN: (IMPVL-159):	Pin 'VSS' of cell 'XOR3D1' is defined in LEF but not in the timing library.
+**WARN: (IMPVL-159):	Pin 'VDD' of cell 'XOR3D1' is defined in LEF but not in the timing library.
+**WARN: (IMPVL-159):	Pin 'VSS' of cell 'XOR3D0' is defined in LEF but not in the timing library.
+**WARN: (IMPVL-159):	Pin 'VDD' of cell 'XOR3D0' is defined in LEF but not in the timing library.
+**WARN: (IMPVL-159):	Pin 'VSS' of cell 'XOR2D4' is defined in LEF but not in the timing library.
+**WARN: (IMPVL-159):	Pin 'VDD' of cell 'XOR2D4' is defined in LEF but not in the timing library.
+**WARN: (IMPVL-159):	Pin 'VSS' of cell 'XOR2D2' is defined in LEF but not in the timing library.
+**WARN: (IMPVL-159):	Pin 'VDD' of cell 'XOR2D2' is defined in LEF but not in the timing library.
+**WARN: (EMS-27):	Message (IMPVL-159) has exceeded the current message display limit of 20.
+To increase the message display limit, refer to the product command reference manual.
+*** Netlist is unique.
+**WARN: (IMPFP-3961):	The techSite 'dcore' has no related standard cells in LEF/OA library. Cannot make calculations for this site type unless standard cell models of this type exist in the LEF/OA library. If the SITE is not used by the library you can ignore this warning or remove the SITE definition from the LEF/OA to avoid this message.
+**WARN: (IMPFP-3961):	The techSite 'ccore' has no related standard cells in LEF/OA library. Cannot make calculations for this site type unless standard cell models of this type exist in the LEF/OA library. If the SITE is not used by the library you can ignore this warning or remove the SITE definition from the LEF/OA to avoid this message.
+Loading preference file /home/linux/ieng6/ee260bwi22/cdrewes/ECE260B_final_project/route.enc.dat/gui.pref.tcl ...
+**WARN: (IMPTCM-77):	Option "-drouteStartIteration" for command setNanoRouteMode is obsolete and will be removed in a future release. The obsolete option still works in this release but to avoid this warning and to ensure compatibility with future releases, remove the obsolete option from your script.
+fullchip
+**WARN: (IMPFP-3961):	The techSite 'dcore' has no related standard cells in LEF/OA library. Cannot make calculations for this site type unless standard cell models of this type exist in the LEF/OA library. If the SITE is not used by the library you can ignore this warning or remove the SITE definition from the LEF/OA to avoid this message.
+**WARN: (IMPFP-3961):	The techSite 'ccore' has no related standard cells in LEF/OA library. Cannot make calculations for this site type unless standard cell models of this type exist in the LEF/OA library. If the SITE is not used by the library you can ignore this warning or remove the SITE definition from the LEF/OA to avoid this message.
+Loading place ...
+**WARN: (IMPEXT-2760):	Layer M9 specified in the cap table is ignored because it is greater than the maximum number of layers, 8, specified in the technology LEF file. Check the cap table for the invalid layer specification.
+**WARN: (IMPEXT-2771):	Via VIA_8 specified in the cap table is ignored because its top layer, M9, is greater than the maximum number of layers, 8, specified in the technology LEF file. Check the cap table for the invalid layer specification.
+**WARN: (IMPEXT-2801):	Resistance values are not provided in the Cap Table. Sheet resistance defined in the LEF file will be used.
+**WARN: (IMPEXT-2710):	Basic Cap table for layer M9 is ignored because the layer is not specified in the technology LEF file.
+**WARN: (IMPEXT-2760):	Layer M9 specified in the cap table is ignored because it is greater than the maximum number of layers, 8, specified in the technology LEF file. Check the cap table for the invalid layer specification.
+**WARN: (IMPEXT-2771):	Via VIA_8 specified in the cap table is ignored because its top layer, M9, is greater than the maximum number of layers, 8, specified in the technology LEF file. Check the cap table for the invalid layer specification.
+**WARN: (IMPEXT-2801):	Resistance values are not provided in the Cap Table. Sheet resistance defined in the LEF file will be used.
+**WARN: (IMPEXT-2710):	Basic Cap table for layer M9 is ignored because the layer is not specified in the technology LEF file.
+'set_default_switching_activity' finished successfully.
+** WARN:  (VOLTUS_POWR-3212): The 'set_power_analysis_mode -leakage_power_view |-dynamic_power_view|-analysis_view' will be obsolete in 18.20 release. Use 'set_analysis_view -leakage <> | -dynamic <>' to set leakage and dynamic power views.
+
+**WARN: (IMPCTE-107):	The following globals have been obsoleted since version 19.17-s077_1. They will be removed in the next release. 
+timing_enable_default_delay_arc
+<CMD> zoomBox -50.82700 683.51400 589.21700 1275.53400
+<CMD> zoomBox -50.82700 565.11000 589.21700 1157.13000
+<CMD> zoomBox -50.82700 446.70600 589.21700 1038.72600
+<CMD> zoomBox -50.82700 328.30200 589.21700 920.32200
+<CMD> zoomBox -910.76800 32.07400 1438.10300 2204.70350
+<CMD> zoomBox -189.68100 68.03200 696.19600 887.43950
+<CMD> zoomBox -68.51450 74.07450 571.53150 666.09650
+<CMD> zoomBox 82.27800 81.59450 416.38600 390.63350
+<CMD> zoomBox 127.97550 83.87300 369.36900 307.15400
+<CMD> zoomBox 160.99250 85.51950 335.39900 246.84000
+<CMD> zoomBox 184.84700 86.70900 310.85600 203.26300
+<CMD> zoomBox 214.53400 88.18900 280.31150 149.03100
+<CMD> zoomBox 253.71950 124.71350 271.64400 141.29300
+<CMD> zoomBox 261.60500 132.77250 268.36550 139.02550
+<CMD> zoomBox 177.36000 46.67650 303.38900 163.24900
+<CMD> zoomBox 143.16950 11.73400 317.60350 173.08000
+<CMD> setDrawView place
+<CMD> zoomBox 203.35700 42.79850 294.41300 127.02250
+<CMD> zoomBox 244.29650 63.92850 278.63900 95.69400
+<CMD> zoomBox 251.17500 67.47900 275.98800 90.43000
+<CMD> zoomBox 259.73550 71.89700 272.68900 83.87850
+<CMD> zoomBox 262.33000 73.23550 271.68900 81.89250
+<CMD> zoomBox 132.90100 -29.46750 374.38950 193.90150
+<CMD> zoomBox -89.46350 -205.91450 550.83600 386.34200
+<CMD> zoomBox -940.90050 -1433.30950 1408.90550 740.18500
+<CMD> zoomBox -628.78350 -911.14700 1068.95150 659.20300
+<CMD> setDrawView ameba
+<CMD> setDrawView ameba
+<CMD> setDrawView place
+<CMD> zoomBox 3.95350 89.09100 466.57100 516.99700
+<CMD> zoomBox 69.71900 193.05400 403.96050 502.21650
+<CMD> zoomBox 117.23500 268.16750 358.72450 491.53750
+<CMD> zoomBox 176.36850 361.64650 302.42800 478.24750
+<CMD> zoomBox 194.28850 389.97550 285.36700 474.22000
+<CMD> zoomBox 223.34900 435.91500 257.70000 467.68850
+<CMD> zoomBox 228.23200 443.63450 253.05100 466.59150
+<CMD> zoomBox 231.76000 449.21200 249.69200 465.79850
+<CMD> zoomBox 236.15050 456.15400 245.51150 464.81250
+<CMD> zoomBox 237.48100 458.25750 244.24450 464.51350
+<CMD> zoomBox 239.13650 460.87500 242.66750 464.14100
+<CMD> zoomBox 228.22600 443.62800 253.05450 466.59350
+<CMD> zoomBox 216.57800 425.21550 264.14250 469.21100
+<CMD> zoomBox 207.21900 410.42100 273.05200 471.31450
+<CMD> zoomBox 176.33600 361.60150 302.45250 478.25500
+<CMD> zoomBox 151.52100 322.37350 326.07700 483.83200
+<CMD> zoomBox 3.83950 88.91900 466.67050 517.02250
+<CMD> zoomBox -419.37200 -298.69500 807.80950 836.40800
+<CMD> zoomBox -99.14050 -173.48650 541.45600 419.04450
+
+--------------------------------------------------------------------------------
+Exiting Innovus on Mon Mar  7 09:17:48 2022
+  Total CPU time:     0:01:23
+  Total real time:    0:04:36
+  Peak memory (main): 1076.50MB
+
+
+*** Memory Usage v#1 (Current mem = 1300.684M, initial mem = 283.785M) ***
+*** Message Summary: 1637 warning(s), 0 error(s)
+
+--- Ending "Innovus" (totcpu=0:01:21, real=0:04:34, mem=1300.7M) ---
