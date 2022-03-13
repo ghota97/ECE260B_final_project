@@ -49,6 +49,10 @@ reg load = 0;
 reg [3:0] qkmem_add = 0;
 reg [3:0] pmem_add = 0;
 
+reg acc = 0;
+reg div = 0;
+reg wr_norm = 0;
+wire [col*bw_psum-1:0] out;
 
 assign inst[16] = ofifo_rd;
 assign inst[15:12] = qkmem_add;
@@ -74,7 +78,11 @@ fullchip #(.bw(bw), .bw_psum(bw_psum), .col(col), .pr(pr)) fullchip_instance (
       .reset(reset),
       .clk(clk), 
       .mem_in(mem_in), 
-      .inst(inst)
+      .inst(inst),
+      .acc(acc),
+      .div(div),
+      .wr_norm(wr_norm),
+      .out(out)
 );
 
 
@@ -360,7 +368,36 @@ $display("##### move ofifo to pmem #####");
 
 ///////////////////////////////////////////
 
+$display("##### normalize output #####");
 
+  #0.5 clk = 1'b0;
+  pmem_rd = 1; 
+  #0.5 clk = 1'b1;
+
+  #0.5 clk = 1'b0;
+  acc = 1; 
+  
+  for(q=0; q<total_cycle; q=q+1) begin
+    pmem_add = pmem_add + 1;
+    $display("Fetching pmem @cycle%2d", q);
+    #0.5 clk = 1'b1;
+    #0.5 clk = 1'b0;
+  end
+
+  acc = 0 ; div = 0; pmem_add = 0; wr_norm = 1;
+
+  for(q=0; q<2*total_cycle+2; q=q+1) begin
+    if(q%2 == 1) begin
+      if(q > 2) pmem_add = pmem_add + 1;
+      pmem_wr  = 0; pmem_rd = 1; div =1;
+    end else if(q>1) begin 
+        $display("output @cycle%2d: %40h", q, out);
+        pmem_wr = 1; pmem_rd = 0; div = 0;
+    end
+    #0.5 clk = 1'b1;
+    #0.5 clk = 1'b0;
+  end
+  
 
 
   #10 $finish;
