@@ -1,0 +1,60 @@
+ 
+****************************************
+Report : area
+Design : fullchip
+Version: Q-2019.12-SP5-3
+Date   : Sun Mar 13 19:50:56 2022
+****************************************
+
+Information: Updating design information... (UID-85)
+Warning: Design 'fullchip' contains 1 high-fanout nets. A fanout number of 1000 will be used for delay calculations involving these nets. (TIM-134)
+Library(s) Used:
+
+    tcbn65gplustc (File: /home/linux/ieng6/ee260bwi22/nsaha/HW3/run0/PDKdata/db/tcbn65gplustc.db)
+
+Number of ports:                        22351
+Number of nets:                         94888
+Number of cells:                        68299
+Number of combinational cells:          55354
+Number of sequential cells:             12285
+Number of macros/black boxes:               0
+Number of buf/inv:                       9589
+Number of references:                       2
+
+Combinational area:             166213.800029
+Buf/Inv area:                    12044.160432
+Noncombinational area:          111578.036790
+Macro/Black Box area:                0.000000
+Net Interconnect area:      undefined  (Wire load has zero net area)
+
+Total cell area:                277791.836819
+Total area:                 undefined
+1
+ 
+****************************************
+Report : reference
+Design : fullchip
+Version: Q-2019.12-SP5-3
+Date   : Sun Mar 13 19:51:00 2022
+****************************************
+
+Attributes:
+    b - black box (unknown)
+   bo - allows boundary optimization
+    d - dont_touch
+   mo - map_only
+    h - hierarchical
+    n - noncombinational
+    r - removable
+    s - synthetic operator
+    u - contains unmapped logic
+
+Reference          Library       Unit Area   Count    Total Area   Attributes
+-----------------------------------------------------------------------------
+BUFFD1             tcbn65gplustc
+                                  1.440000     157    226.080009  
+core_col8_bw8_bw_psum20_pr16  277565.756810
+                                                 1  277565.756810 h, n
+-----------------------------------------------------------------------------
+Total 2 references                                  277791.836819
+1
