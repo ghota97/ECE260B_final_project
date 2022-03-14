@@ -1,12 +1,12 @@
 // Created by prof. Mingu Kang @VVIP Lab in UCSD ECE department
 // Please do not spread this code without permission 
-module sfp_row (clk, reset, acc, div, fifo_ext_rd, sum_in, sum_out, sfp_in, sfp_out);
+module sfp_row (clk, fifo_ext_rd_clk, reset, acc, div, fifo_ext_rd, sum_in, sum_out, sfp_in, sfp_out);
 
   parameter col = 8;
   parameter bw = 8;
   parameter bw_psum = 2*bw+4;
 
-  input  clk, div, acc, fifo_ext_rd, reset;
+  input  clk, fifo_ext_rd_clk, div, acc, fifo_ext_rd, reset;
   input  [bw_psum+3:0] sum_in;
   input  [col*bw_psum-1:0] sfp_in;
   wire  [col*bw_psum-1:0] abs;
@@ -79,7 +79,7 @@ module sfp_row (clk, reset, acc, div, fifo_ext_rd, sum_in, sum_out, sfp_in, sfp_
   );
 
   fifo_depth16 #(.bw(bw_psum+4)) fifo_inst_ext (
-     .rd_clk(clk), 
+     .rd_clk(fifo_ext_rd_clk), 
      .wr_clk(clk), 
      .in(sum_q),
      .out(sum_out), 

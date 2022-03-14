@@ -1,19 +1,23 @@
 // Created by prof. Mingu Kang @VVIP Lab in UCSD ECE department
 // Please do not spread this code without permission 
-module core (clk, sum_out, mem_in, out, inst, reset, acc, div, wr_norm);
+module core (clk, fifo_ext_rd_clk, sum_out, mem_in, out, inst, reset, acc, div, wr_norm, sum_in, fifo_ext_rd, sum_out);
 
 parameter col = 8;
 parameter bw = 8;
 parameter bw_psum = 2*bw+4;
 parameter pr = 16;
 
-output [bw_psum+3:0] sum_out;
 output [bw_psum*col-1:0] out;
 wire   [bw_psum*col-1:0] pmem_out;
 input  [pr*bw-1:0] mem_in;
-input  clk, acc, div, wr_norm;
+input  clk, fifo_ext_rd_clk, acc, div, wr_norm;
 input  [16:0] inst; 
 input  reset;
+
+input  [bw_psum+3:0] sum_in;
+output  [bw_psum+3:0] sum_out;
+input fifo_ext_rd;
+
 
 wire  [pr*bw-1:0] mac_in;
 wire  [pr*bw-1:0] kmem_out;
@@ -33,11 +37,6 @@ wire  kmem_rd;
 wire  kmem_wr; 
 wire  pmem_rd;
 wire  pmem_wr; 
-
-wire  [bw_psum+3:0] sum_out,sum_in;
-
-assign sum_in = 24'b0;
-
 assign ofifo_rd = inst[16];
 assign qkmem_add = inst[15:12];
 assign pmem_add = inst[11:8];
@@ -102,10 +101,11 @@ sram_w16 #(.sram_bit(col*bw_psum)) psum_mem_instance (
 
 sfp_row #(.bw(bw), .bw_psum(bw_psum), .col(col)) sfp_instance (
 	.clk(clk),
+	.fifo_ext_rd_clk(fifo_ext_rd_clk),
 	.reset(reset),
 	.acc(acc),
 	.div(div),
-	.fifo_ext_rd(1'b0),
+	.fifo_ext_rd(fifo_ext_rd),
 	.sum_in(sum_in),
 	.sum_out(sum_out),
 	.sfp_in(pmem_out),
