@@ -1,5 +1,5 @@
 set top_module fullchip
-set rtlPath "/home/linux/ieng6/ee260bwi22/nsaha/ECE260B_final_project/verilog"
+set rtlPath "/home/linux/ieng6/ee260bwi22/ghota/ECE260B_final_project/verilog"
 
 # Target library
 set target_library /home/linux/ieng6/ee260bwi22/public/PDKdata/db/tcbn65gplustc.db
