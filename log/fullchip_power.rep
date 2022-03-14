@@ -7,13 +7,13 @@ Report : power
         -analysis_effort low
 Design : fullchip
 Version: Q-2019.12-SP5-3
-Date   : Sun Mar 13 19:51:06 2022
+Date   : Mon Mar 14 00:04:53 2022
 ****************************************
 
 
 Library(s) Used:
 
-    tcbn65gplustc (File: /home/linux/ieng6/ee260bwi22/nsaha/HW3/run0/PDKdata/db/tcbn65gplustc.db)
+    tcbn65gplustc (File: /home/linux/ieng6/ee260bwi22/public/PDKdata/db/tcbn65gplustc.db)
 
 
 Operating Conditions: NCCOM   Library: tcbn65gplustc

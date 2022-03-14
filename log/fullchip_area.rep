@@ -3,14 +3,14 @@
 Report : area
 Design : fullchip
 Version: Q-2019.12-SP5-3
-Date   : Sun Mar 13 19:50:56 2022
+Date   : Mon Mar 14 00:04:44 2022
 ****************************************
 
 Information: Updating design information... (UID-85)
 Warning: Design 'fullchip' contains 1 high-fanout nets. A fanout number of 1000 will be used for delay calculations involving these nets. (TIM-134)
 Library(s) Used:
 
-    tcbn65gplustc (File: /home/linux/ieng6/ee260bwi22/nsaha/HW3/run0/PDKdata/db/tcbn65gplustc.db)
+    tcbn65gplustc (File: /home/linux/ieng6/ee260bwi22/public/PDKdata/db/tcbn65gplustc.db)
 
 Number of ports:                        22351
 Number of nets:                         94888
@@ -35,7 +35,7 @@ Total area:                 undefined
 Report : reference
 Design : fullchip
 Version: Q-2019.12-SP5-3
-Date   : Sun Mar 13 19:51:00 2022
+Date   : Mon Mar 14 00:04:48 2022
 ****************************************
 
 Attributes:
