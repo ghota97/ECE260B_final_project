@@ -25,8 +25,9 @@ integer  weight [col*pr-1:0];
 integer  K[col-1:0][pr-1:0];
 integer  Q[total_cycle-1:0][pr-1:0];
 integer  result[total_cycle-1:0][col-1:0];
-integer  sum[total_cycle-1:0];
-
+reg signed [bw_psum+3:0]  sum[total_cycle-1:0];
+reg signed [bw_psum-1:0]  sum_2cores[total_cycle-1:0];
+reg signed [bw_psum-1:0]  psum[total_cycle-1:0][col-1:0];
 integer i,j,k,t,p,q,s,u, m;
 
 
@@ -53,7 +54,6 @@ reg acc = 0;
 reg div = 0;
 reg wr_norm = 0;
 wire [col*bw_psum-1:0] out;
-
 assign inst[16] = ofifo_rd;
 assign inst[15:12] = qkmem_add;
 assign inst[11:8]  = pmem_add;
@@ -68,11 +68,13 @@ assign inst[0] = pmem_wr;
 
 
 
-reg [bw_psum-1:0] temp5b;
-reg [bw_psum+3:0] temp_sum;
-reg [bw_psum*col-1:0] temp16b;
-
-
+reg signed [bw_psum-1:0] temp5b;
+reg signed [bw_psum-1:0] abs_temp5b;
+reg signed [bw_psum+3:0] temp_sum;
+reg signed [bw_psum+3:0] psum_sign_extend;
+reg signed [bw_psum*col-1:0] temp16b;
+reg [bw_psum*col-1:0] norm_out_col[total_cycle-1:0];
+reg signed [bw_psum-1:0] norm_out[total_cycle-1:0][col-1:0]; 
 
 fullchip #(.bw(bw), .bw_psum(bw_psum), .col(col), .pr(pr)) fullchip_instance (
       .reset(reset),
@@ -172,7 +174,11 @@ $display("##### Estimated multiplication result #####");
   for (t=0; t<total_cycle; t=t+1) begin
      for (q=0; q<col; q=q+1) begin
        result[t][q] = 0;
+       norm_out[t][q] = 0;
      end
+     norm_out_col[t] = 0;
+     sum[t]=0;
+     sum_2cores[t]=0;
   end
 
   for (t=0; t<total_cycle; t=t+1) begin
@@ -182,14 +188,32 @@ $display("##### Estimated multiplication result #####");
          end
 
          temp5b = result[t][q];
+	 psum[t][q] = temp5b;
+	 //$display("temp5b @cycle %2d @column %2d: %5h", t, q, temp5b);
          temp16b = {temp16b[139:0], temp5b};
+	 abs_temp5b = (temp5b[bw_psum - 1])? ~temp5b+1:temp5b;
+	 sum[t] = sum[t] + {4'b0, abs_temp5b};//Absolute temp5b
      end
 
      //$display("%d %d %d %d %d %d %d %d", result[t][0], result[t][1], result[t][2], result[t][3], result[t][4], result[t][5], result[t][6], result[t][7]);
      $display("prd @cycle%2d: %40h", t, temp16b);
+     $display("sum @cycle:%2d: %8h", t, sum[t]);
   end
 
 //////////////////////////////////////////////
+
+$display("##### Estimated Normalization result #####");
+  for (t=0; t<total_cycle; t=t+1) begin
+     for (q=0; q<col; q=q+1) begin
+       psum_sign_extend = (psum[t][q][bw_psum-1])?{4'b1111,psum[t][q]}:{4'b0,psum[t][q]};//Sign Extension For psum
+       sum_2cores[t] = sum[t][bw_psum+3:7];
+       result[t][q] = psum[t][q]/sum_2cores[t];
+       norm_out[t][q] = result[t][q];
+       $display("@cycle %2d @column %2d: psum %6h, total_sum %6h, Norm_out %5h", t, q, psum_sign_extend, sum[t][bw_psum+3:7], norm_out[t][q]);
+       norm_out_col[t] = {norm_out_col[t][139:0], norm_out[t][q]};
+     end
+     $display("normalized out @cycle%2d: %40h", t, norm_out_col[t]);
+  end
 
 
 
@@ -387,14 +411,15 @@ $display("##### normalize output #####");
   acc = 0 ; div = 0; pmem_add = 0; wr_norm = 1;
 
   for(q=0; q<2*total_cycle+2; q=q+1) begin
+    #0.5 clk = 1'b1;
     if(q%2 == 1) begin
-      if(q > 2) pmem_add = pmem_add + 1;
+      if(q > 2) pmem_add = pmem_add + 2;
+      else pmem_add = pmem_add + 1;
       pmem_wr  = 0; pmem_rd = 1; div =1;
     end else if(q>1) begin 
-        $display("output @cycle%2d: %40h", q, out);
-        pmem_wr = 1; pmem_rd = 0; div = 0;
+        $display("output @cycle%2d: expected norm_out: %40h, obtained pmem_out_before_norm: %40h", q, norm_out_col[(q/2)-1], out);
+        pmem_wr = 1; pmem_rd = 0; div = 0; pmem_add = pmem_add -1;
     end
-    #0.5 clk = 1'b1;
     #0.5 clk = 1'b0;
   end
   
