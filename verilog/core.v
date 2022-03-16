@@ -1,6 +1,6 @@
 // Created by prof. Mingu Kang @VVIP Lab in UCSD ECE department
 // Please do not spread this code without permission 
-module core (clk, fifo_ext_rd_clk, sum_out, mem_in, out, inst, reset, acc, div, wr_norm, sum_in, fifo_ext_rd, sum_out);
+module core (clk, fifo_ext_rd_clk, sum_out, mem_in, out, inst, reset, acc, div, wr_norm, sum_in, fifo_ext_rd);
 
 parameter col = 8;
 parameter bw = 8;

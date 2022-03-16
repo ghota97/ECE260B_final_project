@@ -1,0 +1,145 @@
+[03/14 16:41:19      0s] 
+[03/14 16:41:19      0s] Cadence Innovus(TM) Implementation System.
+[03/14 16:41:19      0s] Copyright 2019 Cadence Design Systems, Inc. All rights reserved worldwide.
+[03/14 16:41:19      0s] 
+[03/14 16:41:19      0s] Version:	v19.17-s077_1, built Tue Dec 1 11:09:44 PST 2020
+[03/14 16:41:19      0s] Options:	
+[03/14 16:41:19      0s] Date:		Mon Mar 14 16:41:19 2022
+[03/14 16:41:19      0s] Host:		ieng6-641.ucsd.edu (x86_64 w/Linux 3.10.0-1160.49.1.el7.x86_64) (2cores*4cpus*Intel(R) Xeon(R) CPU E5-2650 v2 @ 2.60GHz 20480KB)
+[03/14 16:41:19      0s] OS:		CentOS Linux release 7.9.2009 (Core)
+[03/14 16:41:19      0s] 
+[03/14 16:41:19      0s] License:
+[03/14 16:41:19      0s] 		invs	Innovus Implementation System	19.1	checkout succeeded
+[03/14 16:41:19      0s] 		8 CPU jobs allowed with the current license(s). Use setMultiCpuUsage to set your required CPU count.
+[03/14 16:41:34     14s] @(#)CDS: Innovus v19.17-s077_1 (64bit) 12/01/2020 11:09 (Linux 2.6.32-431.11.2.el6.x86_64)
+[03/14 16:41:34     14s] @(#)CDS: NanoRoute 19.17-s077_1 NR201130-0207/19_17-UB (database version 18.20, 510.7.1) {superthreading v1.53}
+[03/14 16:41:34     14s] @(#)CDS: AAE 19.17-s018 (64bit) 12/01/2020 (Linux 2.6.32-431.11.2.el6.x86_64)
+[03/14 16:41:34     14s] @(#)CDS: CTE 19.17-s022_1 () Nov 18 2020 03:10:35 ( )
+[03/14 16:41:34     14s] @(#)CDS: SYNTECH 19.17-s005_1 () Oct 28 2020 05:12:49 ( )
+[03/14 16:41:34     14s] @(#)CDS: CPE v19.17-s044
+[03/14 16:41:34     14s] @(#)CDS: IQuantus/TQuantus 19.1.3-s268 (64bit) Mon Aug 10 22:57:12 PDT 2020 (Linux 2.6.32-431.11.2.el6.x86_64)
+[03/14 16:41:34     14s] @(#)CDS: OA 22.60-s011 Tue Jun 16 12:27:00 2020
+[03/14 16:41:34     14s] @(#)CDS: SGN 20.10-d001 (01-Jun-2020) (64 bit executable, Qt5.9.0)
+[03/14 16:41:34     14s] @(#)CDS: RCDB 11.14.18
+[03/14 16:41:34     14s] @(#)CDS: STYLUS 19.10-s021_1 (10/28/2020 08:51 PDT)
+[03/14 16:41:34     14s] Create and set the environment variable TMPDIR to /tmp/innovus_temp_16460_ieng6-641.ucsd.edu_cdrewes_FDRHzB.
+
+[03/14 16:41:34     14s] Change the soft stacksize limit to 0.2%RAM (64 mbytes). Set global soft_stack_size_limit to change the value.
+[03/14 16:41:35     15s] 
+[03/14 16:41:35     15s] **INFO:  MMMC transition support version v31-84 
+[03/14 16:41:35     15s] 
+[03/14 16:41:35     15s] <CMD> set_global _enable_mmmc_by_default_flow      $CTE::mmmc_default
+[03/14 16:41:35     15s] <CMD> suppressMessage ENCEXT-2799
+[03/14 16:41:35     15s] <CMD> win
+[03/14 16:41:50     18s] <CMD> set init_pwr_net VDD
+[03/14 16:41:50     18s] <CMD> set init_gnd_net VSS
+[03/14 16:41:50     18s] <CMD> set init_verilog ./fullchip.out.v
+[03/14 16:41:50     18s] <CMD> set init_design_netlisttype Verilog
+[03/14 16:41:50     18s] <CMD> set init_design_settop 1
+[03/14 16:41:50     18s] <CMD> set init_top_cell fullchip
+[03/14 16:41:50     18s] <CMD> set init_lef_file /home/linux/ieng6/ee260bwi22/public/PDKdata/lef/tcbn65gplus_8lmT2.lef
+[03/14 16:41:50     18s] <CMD> create_library_set -name WC_LIB -timing $worst_timing_lib
+[03/14 16:41:50     18s] <CMD> create_library_set -name BC_LIB -timing $best_timing_lib
+[03/14 16:41:50     18s] <CMD> create_rc_corner -name Cmax -cap_table $worst_captbl -T 125
+[03/14 16:41:50     18s] <CMD> create_rc_corner -name Cmin -cap_table $best_captbl -T -40
+[03/14 16:41:50     18s] <CMD> create_delay_corner -name WC -library_set WC_LIB -rc_corner Cmax
+[03/14 16:41:50     18s] <CMD> create_delay_corner -name BC -library_set BC_LIB -rc_corner Cmin
+[03/14 16:41:50     18s] <CMD> create_constraint_mode -name CON -sdc_file [list $sdc]
+[03/14 16:41:50     18s] <CMD> create_analysis_view -name WC_VIEW -delay_corner WC -constraint_mode CON
+[03/14 16:41:50     18s] <CMD> create_analysis_view -name BC_VIEW -delay_corner BC -constraint_mode CON
+[03/14 16:41:50     18s] <CMD> init_design -setup WC_VIEW -hold BC_VIEW
+[03/14 16:41:50     18s] 
+[03/14 16:41:50     18s] Loading LEF file /home/linux/ieng6/ee260bwi22/public/PDKdata/lef/tcbn65gplus_8lmT2.lef ...
+[03/14 16:41:50     18s] WARNING (LEFPARS-2007): NAMESCASESENSITIVE statement is obsolete in version 5.6 and later.
+[03/14 16:41:50     18s] The LEF parser will ignore this statement.
+[03/14 16:41:50     18s] To avoid this warning in the future, remove this statement from the LEF file with version 5.6 or later. See file /home/linux/ieng6/ee260bwi22/public/PDKdata/lef/tcbn65gplus_8lmT2.lef at line 28.
+[03/14 16:41:50     18s] WARNING (LEFPARS-2019): TOPOFSTACKONLY statement is obsolete in version 5.6 and later.
+[03/14 16:41:50     18s] The LEF parser will ignore this statement.
+[03/14 16:41:50     18s] To avoid this warning in the future, remove this statement from the LEF file with version 5.6 or later See file /home/linux/ieng6/ee260bwi22/public/PDKdata/lef/tcbn65gplus_8lmT2.lef at line 867.
+[03/14 16:41:50     18s] WARNING (LEFPARS-2019): TOPOFSTACKONLY statement is obsolete in version 5.6 and later.
+[03/14 16:41:50     18s] The LEF parser will ignore this statement.
+[03/14 16:41:50     18s] To avoid this warning in the future, remove this statement from the LEF file with version 5.6 or later See file /home/linux/ieng6/ee260bwi22/public/PDKdata/lef/tcbn65gplus_8lmT2.lef at line 877.
+[03/14 16:41:50     18s] WARNING (LEFPARS-2019): TOPOFSTACKONLY statement is obsolete in version 5.6 and later.
+[03/14 16:41:50     18s] The LEF parser will ignore this statement.
+[03/14 16:41:50     18s] To avoid this warning in the future, remove this statement from the LEF file with version 5.6 or later See file /home/linux/ieng6/ee260bwi22/public/PDKdata/lef/tcbn65gplus_8lmT2.lef at line 1014.
+[03/14 16:41:50     18s] WARNING (LEFPARS-2019): TOPOFSTACKONLY statement is obsolete in version 5.6 and later.
+[03/14 16:41:50     18s] The LEF parser will ignore this statement.
+[03/14 16:41:50     18s] To avoid this warning in the future, remove this statement from the LEF file with version 5.6 or later See file /home/linux/ieng6/ee260bwi22/public/PDKdata/lef/tcbn65gplus_8lmT2.lef at line 1024.
+[03/14 16:41:50     18s] WARNING (LEFPARS-2019): TOPOFSTACKONLY statement is obsolete in version 5.6 and later.
+[03/14 16:41:50     18s] The LEF parser will ignore this statement.
+[03/14 16:41:50     18s] To avoid this warning in the future, remove this statement from the LEF file with version 5.6 or later See file /home/linux/ieng6/ee260bwi22/public/PDKdata/lef/tcbn65gplus_8lmT2.lef at line 1161.
+[03/14 16:41:50     18s] WARNING (LEFPARS-2019): TOPOFSTACKONLY statement is obsolete in version 5.6 and later.
+[03/14 16:41:50     18s] The LEF parser will ignore this statement.
+[03/14 16:41:50     18s] To avoid this warning in the future, remove this statement from the LEF file with version 5.6 or later See file /home/linux/ieng6/ee260bwi22/public/PDKdata/lef/tcbn65gplus_8lmT2.lef at line 1171.
+[03/14 16:41:50     18s] WARNING (LEFPARS-2019): TOPOFSTACKONLY statement is obsolete in version 5.6 and later.
+[03/14 16:41:50     18s] The LEF parser will ignore this statement.
+[03/14 16:41:50     18s] To avoid this warning in the future, remove this statement from the LEF file with version 5.6 or later See file /home/linux/ieng6/ee260bwi22/public/PDKdata/lef/tcbn65gplus_8lmT2.lef at line 1308.
+[03/14 16:41:50     18s] WARNING (LEFPARS-2019): TOPOFSTACKONLY statement is obsolete in version 5.6 and later.
+[03/14 16:41:50     18s] The LEF parser will ignore this statement.
+[03/14 16:41:50     18s] To avoid this warning in the future, remove this statement from the LEF file with version 5.6 or later See file /home/linux/ieng6/ee260bwi22/public/PDKdata/lef/tcbn65gplus_8lmT2.lef at line 1318.
+[03/14 16:41:50     18s] WARNING (LEFPARS-2019): TOPOFSTACKONLY statement is obsolete in version 5.6 and later.
+[03/14 16:41:50     18s] The LEF parser will ignore this statement.
+[03/14 16:41:50     18s] To avoid this warning in the future, remove this statement from the LEF file with version 5.6 or later See file /home/linux/ieng6/ee260bwi22/public/PDKdata/lef/tcbn65gplus_8lmT2.lef at line 1372.
+[03/14 16:41:50     18s] WARNING (LEFPARS-2019): TOPOFSTACKONLY statement is obsolete in version 5.6 and later.
+[03/14 16:41:50     18s] The LEF parser will ignore this statement.
+[03/14 16:41:50     18s] To avoid this warning in the future, remove this statement from the LEF file with version 5.6 or later See file /home/linux/ieng6/ee260bwi22/public/PDKdata/lef/tcbn65gplus_8lmT2.lef at line 1383.
+[03/14 16:41:50     18s] WARNING (LEFPARS-2019): TOPOFSTACKONLY statement is obsolete in version 5.6 and later.
+[03/14 16:41:50     18s] The LEF parser will ignore this statement.
+[03/14 16:41:50     18s] To avoid this warning in the future, remove this statement from the LEF file with version 5.6 or later See file /home/linux/ieng6/ee260bwi22/public/PDKdata/lef/tcbn65gplus_8lmT2.lef at line 1604.
+[03/14 16:41:50     18s] WARNING (LEFPARS-2019): TOPOFSTACKONLY statement is obsolete in version 5.6 and later.
+[03/14 16:41:50     18s] The LEF parser will ignore this statement.
+[03/14 16:41:50     18s] To avoid this warning in the future, remove this statement from the LEF file with version 5.6 or later See file /home/linux/ieng6/ee260bwi22/public/PDKdata/lef/tcbn65gplus_8lmT2.lef at line 1614.
+[03/14 16:41:50     18s] WARNING (LEFPARS-2022): DIRECTION statement in VIARULE is obsolete in version 5.6 and later.
+[03/14 16:41:50     18s] The LEF parser will ignore this statement.
+[03/14 16:41:50     18s] To avoid this warning in the future, remove this statement from the LEF file with version 5.6 or later. See file /home/linux/ieng6/ee260bwi22/public/PDKdata/lef/tcbn65gplus_8lmT2.lef at line 1769.
+[03/14 16:41:50     18s] WARNING (LEFPARS-2022): DIRECTION statement in VIARULE is obsolete in version 5.6 and later.
+[03/14 16:41:50     18s] The LEF parser will ignore this statement.
+[03/14 16:41:50     18s] To avoid this warning in the future, remove this statement from the LEF file with version 5.6 or later. See file /home/linux/ieng6/ee260bwi22/public/PDKdata/lef/tcbn65gplus_8lmT2.lef at line 1771.
+[03/14 16:41:50     18s] WARNING (LEFPARS-2021): turn-via is obsolete in version 5.6 and later.
+[03/14 16:41:50     18s] The LEF parser will ignore this statement.
+[03/14 16:41:50     18s] To avoid this warning in the future, remove this statement from the LEF file with version 5.6 or later. See file /home/linux/ieng6/ee260bwi22/public/PDKdata/lef/tcbn65gplus_8lmT2.lef at line 1772.
+[03/14 16:41:50     18s] WARNING (LEFPARS-2022): DIRECTION statement in VIARULE is obsolete in version 5.6 and later.
+[03/14 16:41:50     18s] The LEF parser will ignore this statement.
+[03/14 16:41:50     18s] To avoid this warning in the future, remove this statement from the LEF file with version 5.6 or later. See file /home/linux/ieng6/ee260bwi22/public/PDKdata/lef/tcbn65gplus_8lmT2.lef at line 1776.
+[03/14 16:41:50     18s] WARNING (LEFPARS-2022): DIRECTION statement in VIARULE is obsolete in version 5.6 and later.
+[03/14 16:41:50     18s] The LEF parser will ignore this statement.
+[03/14 16:41:50     18s] To avoid this warning in the future, remove this statement from the LEF file with version 5.6 or later. See file /home/linux/ieng6/ee260bwi22/public/PDKdata/lef/tcbn65gplus_8lmT2.lef at line 1778.
+[03/14 16:41:50     18s] WARNING (LEFPARS-2021): turn-via is obsolete in version 5.6 and later.
+[03/14 16:41:50     18s] The LEF parser will ignore this statement.
+[03/14 16:41:50     18s] To avoid this warning in the future, remove this statement from the LEF file with version 5.6 or later. See file /home/linux/ieng6/ee260bwi22/public/PDKdata/lef/tcbn65gplus_8lmT2.lef at line 1779.
+[03/14 16:41:50     18s] WARNING (LEFPARS-2022): DIRECTION statement in VIARULE is obsolete in version 5.6 and later.
+[03/14 16:41:50     18s] The LEF parser will ignore this statement.
+[03/14 16:41:50     18s] To avoid this warning in the future, remove this statement from the LEF file with version 5.6 or later. See file /home/linux/ieng6/ee260bwi22/public/PDKdata/lef/tcbn65gplus_8lmT2.lef at line 1783.
+[03/14 16:41:50     18s] Set DBUPerIGU to M2 pitch 400.
+[03/14 16:41:51     18s] **WARN: (IMPLF-200):	Pin 'I' in macro 'ANTENNA' has no ANTENNAGATEAREA value defined. The library data is incomplete and some process antenna rules will not be checked correctly.
+[03/14 16:41:51     18s] Type 'man IMPLF-200' for more detail.
+[03/14 16:41:51     18s] 
+[03/14 16:41:51     18s] viaInitial starts at Mon Mar 14 16:41:51 2022
+viaInitial ends at Mon Mar 14 16:41:51 2022
+
+##  Check design process and node:  
+##  Both design process and tech node are not set.
+
+[03/14 16:41:51     18s] Reading WC_LIB timing library '/home/linux/ieng6/ee260bwi22/public/PDKdata/lib/tcbn65gpluswc.lib' ...
+[03/14 16:41:52     19s] Read 811 cells in library 'tcbn65gpluswc' 
+[03/14 16:41:52     19s] Reading BC_LIB timing library '/home/linux/ieng6/ee260bwi22/public/PDKdata/lib/tcbn65gplusbc.lib' ...
+[03/14 16:41:53     21s] Read 811 cells in library 'tcbn65gplusbc' 
+[03/14 16:41:53     21s] Ending "PreSetAnalysisView" (total cpu=0:00:02.7, real=0:00:02.0, peak res=598.4M, current mem=513.4M)
+[03/14 16:41:53     21s] *** End library_loading (cpu=0.04min, real=0.03min, mem=27.0M, fe_cpu=0.35min, fe_real=0.57min, fe_mem=708.4M) ***
+[03/14 16:41:53     21s] **ERROR: (IMPSYT-16038):	The specified file './fullchip.out.v' could not be found. Check your file system, correct the file name.
+[03/14 16:41:53     21s] **ERROR: (IMPIMEX-7008):	No netlist files are found.
+[03/14 16:41:53     21s] 
+[03/14 16:42:09     23s] **INFO (INTERRUPT): The current script will stop before next command.
+[03/14 16:42:09     23s] **INFO (INTERRUPT): One more Ctrl-C to exit Innovus ...
+[03/14 16:42:09     23s] Innovus terminated by user interrupt.
+[03/14 16:42:09     23s] 
+[03/14 16:42:09     23s] *** Memory Usage v#1 (Current mem = 709.402M, initial mem = 283.785M) ***
+[03/14 16:42:09     23s] 
+[03/14 16:42:09     23s] *** Summary of all messages that are not suppressed in this session:
+[03/14 16:42:09     23s] Severity  ID               Count  Summary                                  
+[03/14 16:42:09     23s] WARNING   IMPLF-200            1  Pin '%s' in macro '%s' has no ANTENNAGAT...
+[03/14 16:42:09     23s] ERROR     IMPSYT-16038         1  The specified file '%s' could not be fou...
+[03/14 16:42:09     23s] ERROR     IMPIMEX-7008         1  No netlist files are found.              
+[03/14 16:42:09     23s] *** Message Summary: 1 warning(s), 2 error(s)
+[03/14 16:42:09     23s] 
+[03/14 16:42:09     23s] --- Ending "Innovus" (totcpu=0:00:24.0, real=0:00:50.0, mem=709.4M) ---
