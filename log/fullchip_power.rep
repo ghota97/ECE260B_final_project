@@ -7,7 +7,7 @@ Report : power
         -analysis_effort low
 Design : fullchip
 Version: Q-2019.12-SP5-3
-Date   : Mon Mar 14 13:12:26 2022
+Date   : Tue Mar 15 16:45:30 2022
 ****************************************
 
 
@@ -416,12 +416,12 @@ Power-specific unit information :
     Leakage Power Units = 1nW
 
 
-  Cell Internal Power  = 102.3851 mW   (97%)
-  Net Switching Power  =   3.5236 mW    (3%)
+  Cell Internal Power  = 102.4198 mW   (97%)
+  Net Switching Power  =   3.4545 mW    (3%)
                          ---------
-Total Dynamic Power    = 105.9087 mW  (100%)
+Total Dynamic Power    = 105.8743 mW  (100%)
 
-Cell Leakage Power     =   1.4781 mW
+Cell Leakage Power     =   1.4875 mW
 
 
                  Internal         Switching           Leakage            Total
@@ -431,9 +431,9 @@ io_pad             0.0000            0.0000            0.0000            0.0000 
 memory             0.0000            0.0000            0.0000            0.0000  (   0.00%)
 black_box          0.0000            0.0000            0.0000            0.0000  (   0.00%)
 clock_network      0.0000            0.0000            0.0000            0.0000  (   0.00%)
-register          97.9762            0.3062        5.3056e+05           98.8126  (  92.02%)
+register          98.0873            0.4533        5.3352e+05           99.0736  (  92.28%)
 sequential         0.0000            0.0000            0.0000            0.0000  (   0.00%)
-combinational      4.4094            3.2174        9.4754e+05            8.5743  (   7.98%)
+combinational      4.3327            3.0012        9.5396e+05            8.2878  (   7.72%)
 --------------------------------------------------------------------------------------------------
-Total            102.3855 mW         3.5236 mW     1.4781e+06 nW       107.3869 mW
+Total            102.4200 mW         3.4545 mW     1.4875e+06 nW       107.3614 mW
 1

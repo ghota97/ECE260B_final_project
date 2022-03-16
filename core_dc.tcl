@@ -109,6 +109,7 @@ change_names -rules verilog -hierarchy
 
 write -format verilog -hier -output [format "%s%s" $top_module .out.v]
 
+read_sdc ${top_module}.sdc
 # Write Reports
 redirect [format "%s%s%s" log/ $top_module _area.rep] { report_area }
 redirect -append [format "%s%s%s" log/ $top_module _area.rep] { report_reference }
