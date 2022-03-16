@@ -1,0 +1,1 @@
+/home/linux/ieng6/ee260bwi22/cdrewes/ECE260B_final_project/constraints/fullchip.sdc

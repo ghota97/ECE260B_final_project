@@ -1,8 +1,8 @@
 set top_module fullchip
-set rtlPath "/home/linux/ieng6/ee260bwi22/nsaha/ECE260B_final_project/verilog"
+set rtlPath "./verilog"
 
 # Target library
-set target_library /home/linux/ieng6/ee260bwi22/public/PDKdata/db/tcbn65gplustc.db
+set target_library /home/linux/ieng6/ee260bwi22/public/PDKdata/db/tcbn65gplusbc.db 
 set link_library $target_library
 set symbol_library {}
 set wire_load_mode enclosed
@@ -42,24 +42,19 @@ define_design_lib WORK -path .template
 set verilogout_single_bit false
 
 # read RTL
-analyze -format verilog -lib WORK core.v
 analyze -format verilog -lib WORK fullchip.v
-analyze -format verilog -lib WORK fifo_depth16.v
-analyze -format verilog -lib WORK fifo_mux_2_1.v
-analyze -format verilog -lib WORK fifo_mux_8_1.v
-analyze -format verilog -lib WORK fifo_mux_16_1.v
-analyze -format verilog -lib WORK mac_16in.v
-analyze -format verilog -lib WORK mac_64in.v
-analyze -format verilog -lib WORK mac_array.v
-analyze -format verilog -lib WORK mac_col.v
-analyze -format verilog -lib WORK ofifo.v
-analyze -format verilog -lib WORK sfp_row.v
-analyze -format verilog -lib WORK sram_128b_w16.v
-analyze -format verilog -lib WORK sram_160b_w16.v
-analyze -format verilog -lib WORK sram_w16.v
+analyze -format verilog -lib WORK core.v
 analyze -format verilog -lib WORK sync.v
-
-
+analyze -format verilog -lib WORK sfp_row.v
+analyze -format verilog -lib WORK mac_col.v
+analyze -format verilog -lib WORK mac_16in.v
+analyze -format verilog -lib WORK mac_array.v
+analyze -format verilog -lib WORK sram_w16.v
+analyze -format verilog -lib WORK ofifo.v
+analyze -format verilog -lib WORK fifo_depth16.v
+analyze -format verilog -lib WORK fifo_mux_16_1.v
+analyze -format verilog -lib WORK fifo_mux_8_1.v 
+analyze -format verilog -lib WORK fifo_mux_2_1.v
 
 elaborate $top_module -lib WORK -update
 current_design $top_module
@@ -68,7 +63,7 @@ current_design $top_module
 link
 
 # Default SDC Constraints
-read_sdc ${top_module}.sdc
+read_sdc ./constraints/${top_module}.sdc
 propagate_constraints
 
 current_design $top_module
@@ -78,10 +73,10 @@ set_fix_multiple_port_nets -all -buffer_constants
 set_fix_hold [all_clocks]
 
 set_driving_cell -lib_cell BUFFD8 -pin Z [all_inputs]
-#set_load [get_attribute "$target_library/BUFFD8/A" fanout_load] [all_outputs]
-foreach_in_collection p [all_outputs] {
-	set_load 0.050 $p
-}
+set_load [get_attribute "$target_library/BUFFD8/A" fanout_load] [all_outputs]
+#foreach_in_collection p [all_outputs] {
+#	set_load 0.050 $p
+#}
 
 #More compiler directives
 set compile_effort   "high"
@@ -100,7 +95,9 @@ current_design $top_module
 
 # Compile
 # Source user compile options
-compile_ultra -no_autoungroup -timing_high_effort_script -exact_map
+#compile_ultra -no_autoungroup -timing_high_effort_script -exact_map
+ungroup -flatten -all
+compile_ultra -timing_high_effort_script -exact_map
 
 # Write Out Design - Hierarchical
 current_design $top_module
@@ -110,7 +107,7 @@ change_names -rules verilog -hierarchy
 write -format verilog -hier -output [format "%s%s" $top_module .out.v]
 
 # Write Reports
-redirect [format "%s%s%s" log/ $top_module _area.rep] { report_area }
+redirect [format "%s%s" log/ $top_module _area.rep] { report_area }
 redirect -append [format "%s%s%s" log/ $top_module _area.rep] { report_reference }
 redirect [format "%s%s%s" log/ $top_module _power.rep] { report_power }
 redirect [format "%s%s%s" log/ $top_module _timing.rep] \
