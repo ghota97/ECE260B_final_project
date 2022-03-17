@@ -6784,3 +6784,76 @@ source core_dc.tcl
 #@ # Compile
 #@ # Source user compile options
 #@ compile_ultra -no_autoungroup -timing_high_effort_script -exact_map
+#@ 
+#@ # Write Out Design - Hierarchical
+#@ current_design $top_module
+#@ 
+#@ change_names -rules verilog -hierarchy
+#@ 
+#@ write -format verilog -hier -output [format "%s%s" $top_module .out.v]
+#@ 
+#@ read_sdc ${top_module}.sdc
+#@ # Write Reports
+#@ redirect [format "%s%s%s" log/ $top_module _area.rep] { report_area }
+#@ redirect -append [format "%s%s%s" log/ $top_module _area.rep] { report_reference }
+#@ redirect [format "%s%s%s" log/ $top_module _power.rep] { report_power }
+#@ redirect [format "%s%s%s" log/ $top_module _timing.rep]   { report_timing -path full -max_paths 100 -nets -transition_time -capacitance -significant_digits 3 -nosplit}
+#@ 
+#@ set inFile  [open log/$top_module\_area.rep]
+#@ while { [gets $inFile line]>=0 } {
+#@     if { [regexp {Total cell area:} $line] } {
+#@         set AREA [lindex $line 3]
+#@     }
+#@ }
+#@ close $inFile
+#@ set inFile  [open log/$top_module\_power.rep]
+#@ while { [gets $inFile line]>=0 } {
+#@     if { [regexp {Total Dynamic Power} $line] } {
+#@         set PWR [lindex $line 4]
+#@     } elseif { [regexp {Cell Leakage Power} $line] } {  
+#@         set LEAK [lindex $line 4] 
+#@     }
+#@ }
+#@ close $inFile
+#@ 
+#@ set unmapped_designs [get_designs -filter "is_unmapped == true" $top_module]
+#@ if {  [sizeof_collection $unmapped_designs] != 0 } {
+#@ 	echo "****************************************************"
+#@ 	echo "* ERROR!!!! Compile finished with unmapped logic.  *"
+#@ 	echo "****************************************************"
+#@ }
+#@ # Done
+#@ sh date
+#@ sh uptime
+#@ 
+#@ # Done
+#@ echo "run.scr completed successfully"
+#@ 
+#@ # -- End source core_dc.tcl
+
+set_multicycle_path -setup 4 -from [get_pins {core_instance/psum_mem_instance/Q_reg*/CP}] -to [get_pins {core_instance/sfp_instance/sfp_out_sign*_reg*/D}]
+set_multicycle_path -hold 3 -from [get_pins {core_instance/psum_mem_instance/Q_reg*/CP}] -to [get_pins {core_instance/sfp_instance/sfp_out_sign*_reg*/D}]
+read_sdc fullchip.sdc
+redirect [format "%s%s%s" log/ $top_module _timing.rep]   { report_timing -path full -max_paths 100 -nets -transition_time -capacitance -significant_digits 3 -nosplit}
+read_sdc fullchip.sdc
+read_sdc fullchip.sdc
+redirect [format "%s%s%s" log/ $top_module _timing.rep]   { report_timing -path full -max_paths 100 -nets -transition_time -capacitance -significant_digits 3 -nosplit}
+read_sdc fullchip.sdc
+read_sdc fullchip.sdc
+read_sdc fullchip.sdc
+redirect [format "%s%s%s" log/ $top_module _timing.rep]   { report_timing -path full -max_paths 100 -nets -transition_time -capacitance -significant_digits 3 -nosplit}
+read_sdc fullchip.sdc
+redirect [format "%s%s%s" log/ $top_module _timing.rep]   { report_timing -path full -max_paths 100 -nets -transition_time -capacitance -significant_digits 3 -nosplit}
+read_sdc fullchip.sdc
+redirect [format "%s%s%s" log/ $top_module _timing.rep]   { report_timing -path full -max_paths 100 -nets -transition_time -capacitance -significant_digits 3 -nosplit}
+read_sdc fullchip.sdc
+read_sdc fullchip.sdc
+read_sdc fullchip.sdc
+read_sdc fullchip.sdc
+read_sdc fullchip.sdc
+read_sdc fullchip.sdc
+read_sdc fullchip.sdc
+read_sdc fullchip.sdc
+read_sdc fullchip.sdc
+redirect [format "%s%s%s" log/ $top_module _timing.rep]   { report_timing -path full -max_paths 100 -nets -transition_time -capacitance -significant_digits 3 -nosplit}
+exit
