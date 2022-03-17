@@ -1,6 +1,6 @@
 // Created by prof. Mingu Kang @VVIP Lab in UCSD ECE department
 // Please do not spread this code without permission 
-module mac_16in (out, a, b);
+module mac_16in (out, a, b, clk, reset);
 
 parameter bw = 8;
 parameter bw_psum = 2*bw+6;
@@ -9,6 +9,7 @@ parameter pr = 64; // parallel factor: number of inputs = 64
 output [bw_psum-1:0] out;
 input  [pr*bw-1:0] a;
 input  [pr*bw-1:0] b;
+input clk, reset;
 
 
 wire		[2*bw-1:0]	product0	;
@@ -27,6 +28,24 @@ wire		[2*bw-1:0]	product12	;
 wire		[2*bw-1:0]	product13	;
 wire		[2*bw-1:0]	product14	;
 wire		[2*bw-1:0]	product15	;
+
+reg		[2*bw-1:0]	product0_reg		;
+reg		[2*bw-1:0]	product1_reg		;
+reg		[2*bw-1:0]	product2_reg		;
+reg		[2*bw-1:0]	product3_reg		;
+reg		[2*bw-1:0]	product4_reg		;
+reg		[2*bw-1:0]	product5_reg		;
+reg		[2*bw-1:0]	product6_reg		;
+reg		[2*bw-1:0]	product7_reg		;
+reg		[2*bw-1:0]	product8_reg		;
+reg     	[2*bw-1:0]	product9_reg		;
+reg		[2*bw-1:0]	product10_reg		;
+reg		[2*bw-1:0]	product11_reg		;
+reg		[2*bw-1:0]	product12_reg		;
+reg		[2*bw-1:0]	product13_reg		;
+reg		[2*bw-1:0]	product14_reg		;
+reg		[2*bw-1:0]	product15_reg		;
+
 
 
 genvar i;
@@ -49,25 +68,64 @@ assign	product13	=	{{(bw){a[bw*	14	-1]}},	a[bw*	14	-1:bw*	13	]}	*	{{(bw){b[bw*	1
 assign	product14	=	{{(bw){a[bw*	15	-1]}},	a[bw*	15	-1:bw*	14	]}	*	{{(bw){b[bw*	15	-1]}},	b[bw*	15	-1:	bw*	14	]};
 assign	product15	=	{{(bw){a[bw*	16	-1]}},	a[bw*	16	-1:bw*	15	]}	*	{{(bw){b[bw*	16	-1]}},	b[bw*	16	-1:	bw*	15	]};
 
+always @ (posedge clk) begin
+  if (reset) begin
+	  product0_reg <= 0;
+	  product1_reg <= 0;
+	  product2_reg <= 0;
+	  product3_reg <= 0;
+	  product4_reg <= 0;
+	  product5_reg <= 0;
+	  product6_reg <= 0;
+	  product7_reg <= 0;
+	  product8_reg <= 0;
+	  product9_reg <= 0;
+	  product10_reg <= 0;
+	  product11_reg <= 0;
+	  product12_reg <= 0;
+	  product13_reg <= 0;
+	  product14_reg <= 0;
+	  product15_reg <= 0;
+  end
+  else begin
+	  product0_reg <= product0;
+	  product1_reg <= product1;
+	  product2_reg <= product2;
+	  product3_reg <= product3;
+	  product4_reg <= product4;
+	  product5_reg <= product5;
+	  product6_reg <= product6;
+	  product7_reg <= product7;
+	  product8_reg <= product8;
+	  product9_reg <= product9;
+	  product10_reg <= product10;
+	  product11_reg <= product11;
+	  product12_reg <= product12;
+	  product13_reg <= product13;
+	  product14_reg <= product14;
+	  product15_reg <= product15;
+  end
+end
+
 
 
 assign out = 
-                {{(4){product0[2*bw-1]}},product0	}
-	+	{{(4){product1[2*bw-1]}},product1	}
-	+	{{(4){product2[2*bw-1]}},product2	}
-	+	{{(4){product3[2*bw-1]}},product3	}
-	+	{{(4){product4[2*bw-1]}},product4	}
-	+	{{(4){product5[2*bw-1]}},product5	}
-	+	{{(4){product6[2*bw-1]}},product6	}
-	+	{{(4){product7[2*bw-1]}},product7	}
-	+	{{(4){product8[2*bw-1]}},product8	}
-	+	{{(4){product9[2*bw-1]}},product9	}
-	+	{{(4){product10[2*bw-1]}},product10	}
-	+	{{(4){product11[2*bw-1]}},product11	}
-	+	{{(4){product12[2*bw-1]}},product12	}
-	+	{{(4){product13[2*bw-1]}},product13	}
-	+	{{(4){product14[2*bw-1]}},product14	}
-	+	{{(4){product15[2*bw-1]}},product15	};
+                {{(4){product0_reg[2*bw-1]}},product0_reg	}
+	+	{{(4){product1_reg[2*bw-1]}},product1_reg	}
+	+	{{(4){product2_reg[2*bw-1]}},product2_reg	}
+	+	{{(4){product3_reg[2*bw-1]}},product3_reg	}
+	+	{{(4){product4_reg[2*bw-1]}},product4_reg	}
+	+	{{(4){product5_reg[2*bw-1]}},product5_reg	}
+	+	{{(4){product6_reg[2*bw-1]}},product6_reg	}
+	+	{{(4){product7_reg[2*bw-1]}},product7_reg	}
+	+	{{(4){product8_reg[2*bw-1]}},product8_reg	}
+	+	{{(4){product9_reg[2*bw-1]}},product9_reg	}
+	+	{{(4){product10_reg[2*bw-1]}},product10_reg	}
+	+	{{(4){product11_reg[2*bw-1]}},product11_reg	}
+	+	{{(4){product12_reg[2*bw-1]}},product12_reg	}
+	+	{{(4){product13_reg[2*bw-1]}},product13_reg	}
+	+	{{(4){product14_reg[2*bw-1]}},product14_reg	}
+	+	{{(4){product15_reg[2*bw-1]}},product15_reg	};
 
 
 
