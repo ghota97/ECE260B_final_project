@@ -29,7 +29,7 @@ assign clk_core1_gated = clk_core1 && core1_en;
 assign clk_core2_gated = clk_core2 && core2_en;
 
 
-core #(.bw(bw), .bw_psum(bw_psum), .col(col), .pr(pr)) core_instance1 (
+core #(.core_id(1'b0),.bw(bw), .bw_psum(bw_psum), .col(col), .pr(pr)) core_instance1 (
       .reset(reset), 
       .clk(clk_core1_gated),
       .fifo_ext_rd_clk(clk_core2_gated), 
@@ -45,7 +45,7 @@ core #(.bw(bw), .bw_psum(bw_psum), .col(col), .pr(pr)) core_instance1 (
 );
 
 
-core #(.bw(bw), .bw_psum(bw_psum), .col(col), .pr(pr)) core_instance2 (
+core #(.core_id(1'b1), .bw(bw), .bw_psum(bw_psum), .col(col), .pr(pr)) core_instance2 (
       .reset(reset), 
       .clk(clk_core2_gated), 
       .fifo_ext_rd_clk(clk_core1_gated), 

@@ -500,8 +500,8 @@ $display("##### normalize output #####");
       else pmem_add = pmem_add + 1;
       pmem_wr  = 0; pmem_rd = 1; div =1; fifo_ext_rd = 1;
     end else if(q>1) begin 
-        $display("Core 1 output @cycle%2d: expected norm_out: core1- %40h, obtained pmem_out_before_norm: core1 %40h", q, norm_out_col_core1[(q/2)-1], out_core1);
-        $display("Core 2 output @cycle%2d: expected norm_out: core2- %40h, obtained pmem_out_before_norm: core2 %40h", q, norm_out_col_core2[(q/2)-1], out_core2);
+        $display("Core 1 output @cycle%2d: expected norm_out: core1- %40h", q, norm_out_col_core1[(q/2)-1]);
+        $display("Core 2 output @cycle%2d: expected norm_out: core2- %40h, ", q, norm_out_col_core2[(q/2)-1]);
         pmem_wr = 1; pmem_rd = 0; div = 0; pmem_add = pmem_add -1; fifo_ext_rd = 0;
     end
     #0.5 clk = 1'b0;

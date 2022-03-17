@@ -2,6 +2,7 @@
 // Please do not spread this code without permission 
 module core (clk, fifo_ext_rd_clk, sum_out, mem_in, out, inst, reset, acc, div, wr_norm, sum_in, fifo_ext_rd);
 
+parameter core_id = 0;
 parameter col = 8;
 parameter bw = 8;
 parameter bw_psum = 2*bw+4;
@@ -115,7 +116,7 @@ sfp_row #(.bw(bw), .bw_psum(bw_psum), .col(col)) sfp_instance (
   //////////// For printing purpose ////////////
   always @(posedge clk) begin
       if(pmem_wr)
-         $display("Memory write to PSUM mem add %x %x ", pmem_add, pmem_in); 
+         $display("Core %d Memory write to PSUM mem add %x %x ", core_id+1, pmem_add, pmem_in); 
   end
 
 

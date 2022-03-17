@@ -1,10 +1,17 @@
-set clock_port clk
+set clock_cycle 1
+set io_delay 0.2
 
-create_clock -name clk -period $clock_cycle [get_ports $clock_port]
+set clock_port0 clk_core1
+set clock_port1 clk_core2
+
+create_clock -name clk_core1 -period $clock_cycle [get_ports $clock_port0]
+create_clock -name clk_core2 -period $clock_cycle [get_ports $clock_port1]
 
 #set_input_delay -clock [get_clocks clk] -add_delay -max $io_delay [all_inputs]
-set_input_delay $io_delay -clock $clock_port [all_inputs]
-set_output_delay $io_delay -clock $clock_port [all_outputs]
+set_input_delay $io_delay -clock $clock_port0 [all_inputs]
+set_input_delay $io_delay -clock $clock_port1 [all_inputs]
+set_output_delay $io_delay -clock $clock_port0 [all_outputs]
+set_output_delay $io_delay -clock $clock_port1 [all_outputs]
 
 #set_multicycle_path -setup 4 -from [get_cells {core_instance/psum_mem_instance/Q_reg*}] -to [get_cells {core_instance/sfp_instance/sfp_out_sign*_reg*}]
 #set_multicycle_path -hold 3 -from [get_cells {core_instance/psum_mem_instance/Q_reg*}] -to [get_cells {core_instance/sfp_instance/sfp_out_sign*_reg*}]
