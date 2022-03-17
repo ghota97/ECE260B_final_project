@@ -52,6 +52,8 @@ reg pmem_rd = 0;
 reg pmem_wr = 0; 
 reg execute = 0;
 reg load = 0;
+reg core1_en = 1;
+reg core2_en = 1;
 reg [3:0] qkmem_add = 0;
 reg [3:0] pmem_add = 0;
 
@@ -88,7 +90,9 @@ reg signed [bw_psum-1:0] norm_out_core2[total_cycle-1:0][col-1:0];
 fullchip #(.bw(bw), .bw_psum(bw_psum), .col(col), .pr(pr)) fullchip_instance (
       .reset(reset),
       .clk_core1(clk), 
-      .clk_core2(clk), 
+      .clk_core2(clk),
+      .core1_en(core1_en),
+      .core2_en(core2_en), 
       .mem_in_core1(mem_in_core1), 
       .mem_in_core2(mem_in_core2), 
       .inst(inst),
