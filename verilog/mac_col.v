@@ -18,12 +18,14 @@ reg    load_ready_q;
 reg    [3:0] cnt_q;
 reg    [1:0] inst_q;
 reg    [1:0] inst_2q;
+reg    [1:0] inst_3q;
 reg   signed [pr*bw-1:0] query_q;
 reg   signed [pr*bw-1:0] key_q;
 wire  signed [bw_psum-1:0] psum;
 
 assign o_inst = inst_q;
-assign fifo_wr = inst_2q[1];
+//assign fifo_wr = inst_2q[1];
+assign fifo_wr = inst_3q[1];
 assign q_out  = query_q;
 assign out = psum;
 
@@ -42,10 +44,12 @@ always @ (posedge clk) begin
     load_ready_q <= 1;
     inst_q <= 0;
     inst_2q <= 0;
+    inst_3q <= 0;
   end
   else begin
     inst_q <= i_inst;
     inst_2q <= inst_q;
+    inst_3q <= inst_2q;
     if (inst_q[0]) begin
        query_q <= q_in;
        if (cnt_q == 9-col_id)begin

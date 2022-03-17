@@ -11,6 +11,7 @@ module sfp_row (clk, fifo_ext_rd_clk, reset, acc, div, fifo_ext_rd, sum_in, sum_
   input  [col*bw_psum-1:0] sfp_in;
   wire  [col*bw_psum-1:0] abs;
   reg    div_q;
+  reg   acc_q;
   output [col*bw_psum-1:0] sfp_out;
   output [bw_psum+3:0] sum_out;
   wire [bw_psum+3:0] sum_this_core;
@@ -35,6 +36,9 @@ module sfp_row (clk, fifo_ext_rd_clk, reset, acc, div, fifo_ext_rd, sum_in, sum_
   reg signed [bw_psum-1:0] sfp_out_sign7;
 
   reg [bw_psum+3:0] sum_q;
+
+  reg [bw_psum+3:0] sum_q_lower;
+  reg [bw_psum+3:0] sum_q_upper;
   reg fifo_wr;
 
   assign sfp_in_sign0 =  sfp_in[bw_psum*1-1 : bw_psum*0];
@@ -88,24 +92,28 @@ module sfp_row (clk, fifo_ext_rd_clk, reset, acc, div, fifo_ext_rd, sum_in, sum_
      .reset(reset)
   );
 
+
   always @ (posedge clk) begin
     if (reset) begin
       fifo_wr <= 0;
     end
     else begin
        div_q <= div ;
-       if (acc) begin
-      
-         sum_q <= 
+       acc_q <= acc;
+       sum_q_lower <= 
            {4'b0, abs[bw_psum*1-1 : bw_psum*0]} +
            {4'b0, abs[bw_psum*2-1 : bw_psum*1]} +
            {4'b0, abs[bw_psum*3-1 : bw_psum*2]} +
-           {4'b0, abs[bw_psum*4-1 : bw_psum*3]} +
+           {4'b0, abs[bw_psum*4-1 : bw_psum*3]};
+   	sum_q_upper <=
            {4'b0, abs[bw_psum*5-1 : bw_psum*4]} +
            {4'b0, abs[bw_psum*6-1 : bw_psum*5]} +
            {4'b0, abs[bw_psum*7-1 : bw_psum*6]} +
            {4'b0, abs[bw_psum*8-1 : bw_psum*7]} ;
-         fifo_wr <= 1;
+
+       if (acc_q) begin
+        sum_q <= sum_q_lower + sum_q_upper;
+        fifo_wr <= 1;
        end
        else begin
          fifo_wr <= 0;
